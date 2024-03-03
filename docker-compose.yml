@@ -1,0 +1,42 @@
+version: '3.5'
+
+services:
+  symfony_skeleton:
+    container_name: symfony_skeleton
+    build:
+      context: ./docker
+      args:
+        UID: $U_ID
+    volumes:
+      - ./:/appdata/www
+    ###> XDEBUG 3 ###
+    environment:
+      XDEBUG_CLIENT_HOST: 172.17.0.1
+      XDEBUG_CLIENT_PORT: 9003
+      PHP_IDE_CONFIG: serverName=symfony_skeleton
+    ports:
+      - '1000:8000'
+    networks:
+      - symfony_skeleton-network
+    depends_on:
+      - symfony_skeleton-mysql
+
+  symfony_skeleton-mysql:
+    container_name: symfony_skeleton-mysql
+    image: mysql:8.0.4
+    ports:
+      - '3336:3306'
+    environment:
+      MYSQL_DATABASE: symfony_skeleton
+      MYSQL_ROOT_PASSWORD: passwd
+    volumes:
+      - symfony_skeleton-mysql-data:/var/lib/mysql
+    networks:
+      - symfony_skeleton-network
+    command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
+
+networks:
+  symfony_skeleton-network:
+
+volumes:
+  symfony_skeleton-mysql-data:
