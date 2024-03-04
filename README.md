@@ -1,6 +1,11 @@
 # Symfony Skeleton
 
 ## Rama main
+En esta rama esta la configuracion basica de solo symfony sin BD
+
+## Rama data_base_skeleton
+
+En esta rama se ecuentra la configuracion de la conexion a un BD postgressql
 
 En esta rama esta la configuracion basica de un esqueleto con symfony-6.1, php:8.2 y postgresql 16
 
