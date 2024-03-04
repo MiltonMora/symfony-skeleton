@@ -1,12 +1,19 @@
 # Symfony Skeleton
 
 ## Rama main
+En esta rama esta la configuracion basica de solo symfony sin BD
 
-En esta rama esta la configuracion basica de un esqueleto con symfony-6.1, php:8.2 y mysql 8.0.4
+## Rama data_base_skeleton
+
+En esta rama se ecuentra la configuracion de la conexion a un BD postgressql
+
+En esta rama esta la configuracion basica de un esqueleto con symfony-6.1, php:8.2 y postgresql 16
 
 Tambien el correspondiente docker con su archivo de make file.
 
-## Proceso para crear un proyecto en symfony con docker php > 8 doctrine
+### Antes de crear asegurese que todas las referecnias, a los nombres de contenendores red y demas comfiguracion de docker en el **docker-compose.yml** y Makefile correspondan a los nombres que se desee poner a las aplicaciones 
+
+## Proceso para crear un proyecto en symfony con docker php > 8
 
 Estos son los pasos a seguir cuando desee crear un proyecto de symfony para futuras pruebas, videos de configuracion [link](https://www.youtube.com/watch?v=4BfbO3QN-pY) y [link](https://www.youtube.com/watch?v=bqaMXiw1Xjw)
 
@@ -57,28 +64,6 @@ Posteriormente se procede a probar si se ha ejecutado correctamente hiendo a la 
 
 dentro del contenedor ejecutamos
 
-```bash
-composer require orm
-```
-
-## Cambiamos la configuracion del ***.env*** para que haga la conexion con la BD
-
-La informacion de usuario contraseña y base de datos se encunentra en el archivo
-**docker-compose.yml** en dodne se definio el contenedor de mysql, la direccion a la  que debe apuntar no es local host dado que se estan ejecutando en la misma red
-```yml
-container_name: symfony_skeleton-mysql
-MYSQL_DATABASE: symfony_skeleton
-MYSQL_ROOT_PASSWORD: passwd
-```
-
-```bash
-DATABASE_URL="mysql://root:!!!MYSQL_ROOT_PASSWORD@!!!container_name:3306/!!!MYSQL_DATABASE?serverVersion=8&charset=utf8mb4"
-```
-
-### Se reinician los conntenedores para verificar la conexion y se crea la BD
-```bash
-make restart
-```
 
 ## Instalacion del command business
 
