@@ -19,24 +19,24 @@ services:
     networks:
       - symfony_skeleton-network
     depends_on:
-      - symfony_skeleton-mysql
+      - symfony_skeleton-postgres
 
-  symfony_skeleton-mysql:
-    container_name: symfony_skeleton-mysql
-    image: mysql:8.0.4
+  symfony_skeleton-postgres:
+    container_name: symfony_skeleton-postgres
+    image: postgres:${POSTGRES_VERSION:-16}-alpine
     ports:
-      - '3336:3306'
+      - '5432:5432'
     environment:
-      MYSQL_DATABASE: symfony_skeleton
-      MYSQL_ROOT_PASSWORD: passwd
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: passwd
+      POSTGRES_DB: symfony_skeleton
     volumes:
-      - symfony_skeleton-mysql-data:/var/lib/mysql
+      - symfony_skeleton-postgres-pgsql-data:/var/lib/postgresql/data:rw
     networks:
       - symfony_skeleton-network
-    command: [ 'mysqld', '--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci' ]
 
 networks:
   symfony_skeleton-network:
 
 volumes:
-  symfony_skeleton-mysql-data:
+  symfony_skeleton-postgres-pgsql-data:

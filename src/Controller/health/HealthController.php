@@ -13,7 +13,7 @@ class HealthController extends AbstractGeneralController
     #[Route('/verify', name: 'app_health')]
     public function verify(): Response
     {
-        $data = $this->commandBus->handle(new HealthCommand());
+        $data = $this->commandBus->handle(new HealthCommand('health'));
         return $this->render('health/index.html.twig', [
             'controller_name' => 'HealthController',
             'data' => $data
