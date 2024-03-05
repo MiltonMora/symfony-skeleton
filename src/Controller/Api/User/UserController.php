@@ -4,6 +4,7 @@ namespace App\Controller\Api\User;
 
 use App\Application\User\Command\UserCreate;
 use App\Controller\AbstractGeneralController;
+use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
@@ -13,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractGeneralController
 {
     #[Route('/create', name: 'app_user_create', methods: ['POST'])]
-    public function create(Request $request): Response
+    public function create(Request $request): JsonResponse
     {
         try {
             $this->commandBus->handle(
@@ -22,11 +23,11 @@ class UserController extends AbstractGeneralController
                     $request->request->get('password'),
                     $request->request->get('email'))
             );
-            return new Response(null, Response::HTTP_OK);
+            return $this->json([], Response::HTTP_OK);
         } catch (\Exception $e) {
-            return Throw new HttpException(
-                Response::HTTP_INTERNAL_SERVER_ERROR, 'Error al crear el usuario '. $e->getMessage()
-            );
+            return $this->json([
+                'message' => $e->getMessage()
+            ], Response::HTTP_INTERNAL_SERVER_ERROR);
         }
     }
 }
