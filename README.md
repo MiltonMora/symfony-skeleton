@@ -126,3 +126,9 @@ dentro del archivo **services.yml** configuramos para que se puedan establecer l
     |       |---AlgunRepository.php
     |---...
 ```
+
+## Autenticacion de usuario con jwt
+
+Generar las claves publicas y privadas con el comando 
+``` sf lexik:jwt:generate-keypair ```
+

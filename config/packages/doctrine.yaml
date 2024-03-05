@@ -8,10 +8,10 @@ doctrine:
         use_savepoints: true
     orm:
         mappings:
-            Health:
+            User:
                 type: xml
-                prefix: App\Domain\Health\Model
-                dir: '%kernel.project_dir%/config/orm/mapping/Health'
+                prefix: App\Domain\User\Model
+                dir: '%kernel.project_dir%/config/orm/mapping/User'
                 is_bundle: false
 
 when@test:

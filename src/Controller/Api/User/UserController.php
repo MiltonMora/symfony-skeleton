@@ -1,19 +1,19 @@
 <?php
 
-namespace App\Controller\health;
+namespace App\Controller\Api\User;
 
-use App\Application\Health\Command\HealthCommand;
+use App\Application\User\Command\User;
 use App\Controller\AbstractGeneralController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-#[Route('/health')]
-class HealthController extends AbstractGeneralController
+#[Route('/api/user')]
+class UserController extends AbstractGeneralController
 {
     #[Route('/verify', name: 'app_health')]
     public function verify(): Response
     {
-        $data = $this->commandBus->handle(new HealthCommand('health'));
+        $data = $this->commandBus->handle(new User('user', 'user', 'user@gmail.com'));
         return $this->render('health/index.html.twig', [
             'controller_name' => 'HealthController',
             'data' => $data
