@@ -60,7 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getRoles(): array
     {
-        return ['USER_ROL'];
+        return ['ROLE_USER'];
         // TODO: Implement getRoles() method.
     }
 

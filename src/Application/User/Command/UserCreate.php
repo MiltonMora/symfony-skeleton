@@ -2,12 +2,21 @@
 
 namespace App\Application\User\Command;
 
-class User
+use Symfony\Component\Validator\Constraints as Assert;
+readonly class UserCreate
 {
-    private readonly string $name;
+    #[Assert\NotBlank]
+    private string $name;
 
-    private readonly string $password;
-    private readonly string $email;
+    #[Assert\NotBlank]
+    #[Assert\GreaterThan(5)]
+    private string $password;
+
+    #[Assert\NotBlank]
+    #[Assert\Email(
+        message: 'Este email {{ value }} No es valido',
+    )]
+    private string $email;
 
     public function __construct(string $name, string $password, string $email)
     {
