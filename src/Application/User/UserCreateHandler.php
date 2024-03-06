@@ -18,7 +18,7 @@ readonly class UserCreateHandler
     )
     {}
 
-    public function handle(UserCreate $command): string
+    public function handle(UserCreate $command): void
     {
         $errors = $this->validator->validate($command);
         if (count($errors) > 0) {
@@ -37,7 +37,6 @@ readonly class UserCreateHandler
         $user->setPassword($hashedPassword);
         $user->setRoles(['ROLE_USER']);
         $this->userInterface->save($user);
-        return 'Healthy';
     }
 
 }
